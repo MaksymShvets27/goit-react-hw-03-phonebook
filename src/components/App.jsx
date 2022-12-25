@@ -8,12 +8,14 @@ import './App.module.css';
 export class App extends React.Component {
   state = {
     contacts: [],
-    filter: '',
+    filterC: '',
   };
 
   componentDidMount() {
-    let localStorageState = JSON.parse(localStorage.getItem('Contacts'));
-    this.setState({ contacts: localStorageState });
+    if (localStorage.getItem('Contacts')) {
+      let localStorageState = JSON.parse(localStorage.getItem('Contacts'));
+      this.setState({ contacts: localStorageState });
+    }
   }
 
   addContact = (name, number) => {
@@ -25,11 +27,11 @@ export class App extends React.Component {
     });
   };
   addFilter = filter => {
-    return this.setState({ filter: filter });
+    return this.setState({ filterC: filter });
   };
 
   filtredContacts = () => {
-    const normalizeFilter = this.state.filter.toLocaleLowerCase();
+    const normalizeFilter = this.state.filterC.toLocaleLowerCase();
 
     const filtredContacts = this.state.contacts.filter(contact =>
       contact.name.toLocaleLowerCase().includes(normalizeFilter)
