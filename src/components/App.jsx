@@ -50,8 +50,10 @@ export class App extends React.Component {
     localStorage.setItem('Contacts', JSON.stringify(this.state.contacts));
   };
 
-  componentDidUpdate() {
-    this.saveLocalStorege();
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      this.saveLocalStorege();
+    }
   }
 
   render() {
